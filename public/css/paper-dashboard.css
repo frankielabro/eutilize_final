@@ -870,7 +870,7 @@ hr {
   border-left: 0 none; }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-  background-color: #908989c2;
+  background-color: #99999;
   cursor: not-allowed;
   color: #9A9A9A;
   opacity: 1;

@@ -29,6 +29,11 @@
                             </div>
 
                         </div>
+                        @if(session()->has('success'))
+                            <div class="alert alert-success">{{ session()->get('success') }}</div>
+                        @elseif(session()->has('error'))
+                            <div class="alert alert-danger">{{ session()->get('error') }}</div>
+                        @endif
                         <div class="content table-responsive">
                             <table id="settings" class="table table-hover">
                                 <thead>
@@ -40,185 +45,26 @@
                                 </thead>
                                 <tbody>
 
-                                    <!-- START OF PHP FOR LOOP  -->
-                                    <!-- 
-                                        <tr>
-                                            <td> 01-01-18 </td>
-                                            <td> 06-01-18 </td>
-                                            <td> 1st </td>
-                                            <td> 2017-2018 </td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary btn-warning" data-toggle="modal" data-target="#EDITMODAL">
-                                                    Edit
-                                                </button>
-                                                <button type="button" class="btn btn-secondary btn-danger" data-toggle="modal" data-target="#DELETEMODAL">Delete</button>
-                                            </td>
-                                        </tr>
-                                    -->
-                                    <!-- END OF PHP FOR LOOP  -->
+                                    @foreach ($semesters as $semester)
+                                    <tr>
+                                        <td> {{ $semester->start_date }} </td>
+                                        <td> {{ $semester->end_date }} </td>
+                                        <td> {{ $semester->sem_desc }} </td>
+                                        <td> {{ $semester->syr_desc }} </td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL" onclick="editSemesterModal('{{$semester->sem_id}}')">
+                                                <i class="ti-pencil-alt"></i>
+                                                EDIT
+                                            </button>
 
-                                    <!-- START OF SAMPLE DATA  -->
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 1st </td>
-                                        <td> 2017-2018 </td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                <i class="ti-pencil-alt"></i>
-                                                EDIT
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
+                                            <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL" onclick="deleteSemesterModal('{{ $semester->sem_id }}')">
                                                 <i class="ti-trash"></i>
                                                 DELETE
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 2nd </td>
-                                        <td> 2017-2018 </td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                <i class="ti-pencil-alt"></i>
-                                                EDIT
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                <i class="ti-trash"></i>
-                                                DELETE
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 1st </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 2nd </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 1st </td>
-                                        <td> 2017-2018 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 2nd </td>
-                                        <td> 2017-2018 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 1st </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 2nd </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 1st </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td> 01-01-18 </td>
-                                        <td> 06-01-18 </td>
-                                        <td> 2nd </td>
-                                        <td> 2016-2017 </td>
-                                        <td>
-                                                <button type="button" class="btn btn-warning btn-just-icon btn-sm btn-fill btn-block" data-toggle="modal" data-target="#EDITMODAL">
-                                                    <i class="ti-pencil-alt"></i>
-                                                    EDIT
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-just-icon  btn-sm btn-block" data-toggle="modal" data-target="#DELETEMODAL">
-                                                    <i class="ti-trash"></i>
-                                                    DELETE
-                                                </button>
-                                            </td>
-                                    </tr>
-                                    <!-- END OF SAMPLE DATA  -->
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>
@@ -237,16 +83,28 @@
             <div class="modal fade" id="ADDMODAL" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header"> 
                             <h4 class="modal-title" id="exampleModalLongTitle">Adding Semester...</h4>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            @if($errors->any())
+
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            @endif
+                            <form method="POST" action={{ URL::to('/semester/add') }}>
                                 <div class="row">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Date Range</label>
-                                                <input type="text" name="datefilter"  class="form-control border-input" >
+                                                <input type="text" name="datefilter" class="form-control border-input" >
                                             </div>
                                         </div>
                                 </div>
@@ -255,65 +113,10 @@
                                         <div class="form-group">
                                             <label>Semester</label>
                                             <div class="input-group mb-3" style="width:100%;">
-                                                <select class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
+                                                <select class="custom-select form-control border-input" name="semesterSelect" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
                                                     <option selected hidden>Choose Semester...</option>
-                                                    <option value="1">1st Semester</option>
-                                                    <option value="2">2nd Semester</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                             <label>School Year</label>
-                                            <div class="input-group mb-3" style="width:100%;">
-                                                    <select id="STARTSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                    <option selected hidden>Choose Semester...</option>
-                                                    <!-- Sample Selection options --> 
-                                                    <option value="1">2019 - 2020</option>
-                                                    <option value="2">2018 - 2019</option>
-                                                    <!-- Sample Selection options --> 
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Add</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ADD MODAL START -->
-            <!-- EDIT MODAL START -->
-            <div class="modal fade" id="EDITMODAL" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLongTitle">Editing the Semester...</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Date Range</label>
-                                            <input type="text" name="datefilter"  class="form-control border-input" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Semester</label>
-                                            <div class="input-group mb-3" style="width:100%;">
-                                                <select class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                    <option selected hidden>Choose Semester...</option>
-                                                    <option value="1">1st Semester</option>
-                                                    <option value="2">2nd Semester</option>
+                                                    <option value="1">First Semester</option>
+                                                    <option value="2">Second Semester</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -321,28 +124,82 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>School Year</label>
-                                            <div class="input-group mb-3" style="width:100%;">
-                                                <select id="STARTSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                    <option selected hidden>Choose Semester...</option>
-                                                    <!-- Sample Selection options --> 
-                                                    <option value="1">2019 - 2020</option>
-                                                    <option value="2">2018 - 2019</option>
-                                                    <!-- Sample Selection options --> 
-                                                </select>
-                                            </div>
+                                            <input type="text" name="addSchoolYear" class="form-control border-input" placeholder="Ex: 2018-2019" >
                                         </div>
-                                    </div>         
+                                    </div>
                                 </div>
-                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-warning">Save Changes</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
                         </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+            <!-- ADD MODAL START -->
+            <!-- EDIT MODAL START -->
+             <div class="modal fade" id="EDITMODAL" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header"> 
+                            <h4 class="modal-title" id="exampleModalLongTitle">Edit Semester...</h4>
+                        </div>
+                        <div class="modal-body">
+                            @if($errors->any())
+
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            @endif
+                            <form method="POST" action={{ URL::to('/semester/update') }}>
+                                <input type="hidden" id="edit_itemID" name="item_id">
+
+                                <div class="row">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Date Range</label>
+                                            <input type="text" name="datefilter" id="edit_datefilter" class="form-control border-input" placeholder="Ex: 05/15/2018 - 06/20/2018">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Semester</label>
+                                            <div class="input-group mb-3" style="width:100%;">
+                                                <select class="custom-select form-control border-input" name="semester" id="edit_semester" style="border: 1px solid #ccc; border-radius: 4px;">
+                                                    <option selected hidden>Choose Semester...</option>
+                                                    <option value="1">First Semester</option>
+                                                    <option value="2">Second Semester</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>School Year</label>
+                                                <input type="text" name="schoolyear" id="edit_schoolyear" class="form-control border-input" placeholder="Ex: 2018-2019" >
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                        </form> 
                     </div>
                 </div>
             </div>
             <!-- EDIT MODAL START -->
+
             <!-- DELETE MODAL START -->
             <div class="modal fade" id="DELETEMODAL" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -355,20 +212,25 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteSemesterConfirm()">Delete</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- DELETE MODAL START -->
+
     <!-- MODAL END -->    
 @endsection
 
 @section('script')
     
-    
     <script>
+
+        var globalItemId = '';
+        var baseURL = "{{url('/')}}";
+
         $(document).ready( function () {
+             
             $('#settings').DataTable({
                 "lengthChange": false,
                 "pageLength": 10,
@@ -395,6 +257,48 @@
             });
 
         } );
+
+        function editSemesterModal(itemId){
+            $.get('/semester/' + itemId, function(data) {
+                $('#edit_itemID').val(data[0].sem_id);
+                $('#edit_datefilter').val(data[0].start_date + " - " + data[0].end_date);
+                $("#edit_schoolyear").val(data[0].syr_desc);
+                if (data[0].sem_desc == "First Semester") {
+                    data[0].sem_desc = 1;
+                }else{
+                    data[0].sem_desc = 2;
+                }
+                $("#edit_semester").val(data[0].sem_desc);
+            });
+        }
+
+        function deleteSemesterModal(itemId) {
+            globalItemId = itemId;
+        }
+
+        function deleteSemesterConfirm(){
+
+            $.ajax({
+                type: "POST",
+                url: baseURL+ "/semester/delete/" + globalItemId,
+                data: { somefield: "Some field value", _token: '{{csrf_token()}}' },
+                success: function (data) {
+                   if(data == 1) {
+                           location.reload();
+                   } else {
+                       location.reload();
+                   }
+                },
+                error: function (data, textStatus, errorThrown) {
+                    if(data == 1) {
+                           location.reload();
+                   } else {
+                       location.reload();
+                   }
+                },
+            });
+
+        }
 
     </script>
 @endsection

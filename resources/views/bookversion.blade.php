@@ -25,7 +25,7 @@
                                                 <i class="ti-reload"></i>
                                             </button>
                                         </div>
-                                    </div>
+                                </div>
 
                         </div>
                         <div class="content table-responsive">

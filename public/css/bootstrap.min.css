@@ -2679,7 +2679,7 @@ output {
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #eee;
+  background-color: #0000;
   opacity: 1;
 }
 .form-control[disabled],

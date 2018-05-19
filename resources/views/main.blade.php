@@ -1,73 +1,78 @@
 @extends('layouts.app')
 
 @section('sector')
-    Main 
+Main 
 @endsection
 
 @section('act-1')
-  class="active"
+class="active"
 @endsection
 
 @section('content')
 
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="header">
-                            <h3 class="title pb-3">Book Information</h3>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h3 class="title pb-3">Book Information</h3>
+                    </div>
+
+                    <div class="alert alert-danger" id="alert" style="display: none;">
+                        <b><h3>BOOK NOT FOUND !</h3></b>
+                    </div>
+
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Book RFID Code</label>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <input id="searchinpt" type="text" class="form-control border-input" placeholder="The RFID Code of the Book">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button id="searchbtn" class="btn btn-info btn-fill btn-block" type="button">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="content">
-                            <form id="scanform">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Book RFID Code</label>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <input id="searchinpt" type="text" class="form-control border-input" placeholder="The RFID Code of the Book">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <button id="searchbtn" class="btn btn-info btn-fill btn-block" type="button" disabled>Search</button>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                        <form id="scanform">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input id="b_itemid" type="hidden" name="country" value="Norway">
+                                        <label>Book Title</label>
+                                        <input id="book_title" type="text" class="form-control border-input inpt" placeholder="The Title of the scanned Book" disabled>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Book Title</label>
-                                            <input type="text" class="form-control border-input inpt" placeholder="The Title of the scanned Book" disabled>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Book Author</label>
+                                        <input id="book_author" type="text" class="form-control border-input inpt" placeholder="The Author of the scanned Book" disabled>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Book Author</label>
-                                            <input type="text" class="form-control border-input inpt" placeholder="The Author of the scanned Book" disabled>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Book Version</label>
+                                        <input id="book_version" type="text" class="form-control border-input inpt" placeholder="The Version of the scanned Book" disabled>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Book Version</label>
-                                            <input type="text" class="form-control border-input inpt" placeholder="The Version of the scanned Book" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="text-center">
-                                    <button id="enterbtn" class="btn btn-info btn-fill btn-wd"  disabled>Enter </input>
-                                    <button id="clearbtn" class="btn btn-secondary btn-wd" disabled>Clear</button>
-                                </div>
-                            </form>
+                            </div>                            
+                        </form>
+                        <div class="text-center">
+                            <button id="enterbtn" class="btn btn-info btn-fill btn-wd">Enter </input>
+                                <button id="clearbtn" class="btn btn-secondary btn-wd">Clear</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,72 +80,92 @@
         </div>
     </div>
 
-@endsection
+    @endsection
 
-@section('script')
+    @section('script')
     <script>
-        $( document ).ready(function() {
-            var $searchinpt = $('#searchinpt');
-            var $searchbtn = $('#searchbtn');
-            var $enterbtn = $('#enterbtn');
-            var $clearbtn = $('#clearbtn');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-            $searchinpt.on('change keyup paste input', function() {
-                if( !$(this).val() ) {
-                    $searchbtn.prop('disabled', true);
-                    $('.inpt').prop('disabled', true);
-                    $enterbtn.prop('disabled', true);
-                    $clearbtn.prop('disabled', true);
-                }else{
-                    $searchbtn.prop('disabled', false);
-                    $('.inpt').prop('disabled', false);
-                    $enterbtn.prop('disabled', false);
-                    $clearbtn.prop('disabled', false);
-                }
-            });
-            
-            $searchbtn.on('click',function(e){
-                if(!($searchbtn.prop('disabled'))){
-                    e.preventDefault();
-                    alert('shift clicked');
-                    //do search ajax here
-                }
-            });
+        $( document ).ready(function() {    
+            $(document).on('click', '#searchbtn', function(e)
+            {
+                var data = {
+                    title: $('#searchinpt').val()
+                }   
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '/searchBookTitle',
+                    data: data,
+                    success: function(response)
+                    {
+                        $('#b_itemid').val(response.b_itemid);
+                        $('#book_title').val(response.b_title);
+                        $('#book_author').val(response.a_name);
+                        $('#book_version').val(response.b_edition);
 
-            $enterbtn.on('click',function(e){
-                if(!($enterbtn.prop('disabled'))){
-                    e.preventDefault();
-                    alert('enter clicked');
-                    //do enter ajax here
-                }
-            });
 
-            $clearbtn.on('click',function(e){
-                if(!($clearbtn.prop('disabled'))){
-                    e.preventDefault();
-                    $searchinpt.val('');
-                    $('.inpt').val('');
-                    $searchinpt.change();
-                }
-            });
+                        console.log(response);
 
-            $(document).keydown(function (e) {
-                if(!($searchbtn.prop('disabled'))){
-                    if (e.keyCode == 16) {
-                        $searchbtn.click();
+                        if (!response.b_itemid) {
+                            console.log('123');
+                            $('#alert').css('display', 'block');
+                        } else {
+                            $('#alert').css('display', 'none');
+                        }
                     }
-                }
-                if(!($enterbtn.prop('disabled'))){
-                    if (e.keyCode == 13) {
-                        $enterbtn.click();
+                }); 
+            });
+
+            $(document).on('click', '#enterbtn', function(e)
+            {                
+                e.preventDefault();
+                var data = {};
+                $("form#scanform :input").each(function()
+                {
+                    data[$(this).attr("id")] = $(this).val(); 
+                });
+                console.log(data);
+                $.ajax({
+                    type: "POST",
+                    url: '/saveBorrowBook',
+                    data: data,
+                    success: function(response)
+                    {
+                       toastr.info("Successfully save!")
+                    },
+                    error: function(response)
+                    {
+                        console.log(response.responseJSON);
+                        $.each(response.responseJSON.errors, function( index, value ) {
+                            toastr.error(value)
+                        });
                     }
-                }
-                if(!($clearbtn.prop('disabled'))){
-                    if (e.keyCode == 27) {
-                        $clearbtn.click();
-                    }
-                }
+                }); 
             });
         });
+
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-center",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        
     </script>
-@endsection
+    @endsection

@@ -14,9 +14,11 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
+            $table->integer('b_itemid');
             $table->integer('b_isbn');
             $table->integer('bc_id');
             $table->integer('b_rfid');
+            $table->integer('b_qty');
             $table->string('b_title');
             $table->string('b_edition');
         });

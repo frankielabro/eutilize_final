@@ -37,7 +37,7 @@
 	<script src="{{ asset('auth/vendor/bootstrap/js/popper.js') }}"></script>
 	<script src="{{ asset('auth/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <!--===============================================================================================-->
-	<script src="{{ asset('auth/js/main.js') }}"></script>
+	
 
 </body>
 </html>

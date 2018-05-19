@@ -29,8 +29,11 @@
                             </div>
                         </div>
                         <div class="content table-responsive">
-                        </div>
 
+                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -143,6 +146,13 @@
 @endsection
 
 @section('script')
+
+<script src="{{ asset('auth/js/main.js') }}"></script>
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="//rawgithub.com/phpepe/highcharts-regression/master/highcharts-regression.js?8"></script>
     <script>
         $(document).ready(function () {
             $('#activitylog').DataTable({
@@ -174,5 +184,84 @@
                 }
             })
         });
+
+
+
+        $(function() {
+  $('#container').highcharts({
+    chart: {
+      type: 'scatter',
+      zoomType: 'xy'
+    },
+    title: {
+      text: 'Basic default settings: linear regression with equation in the legend'
+    },
+    subtitle: {
+      text: 'Source: Heinz  2003'
+    },
+    xAxis: {
+      title: {
+        enabled: true,
+        text: 'Height (cm)'
+      },
+      startOnTick: true,
+      endOnTick: true,
+      showLastLabel: true
+    },
+    yAxis: {
+      title: {
+        text: 'Weight (kg)'
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'left',
+      verticalAlign: 'top',
+      x: 100,
+      y: 70,
+      floating: true,
+      backgroundColor: '#FFFFFF',
+      borderWidth: 1
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 5,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: 'rgb(100,100,100)'
+            }
+          }
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false
+            }
+          }
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x} cm, {point.y} kg'
+        }
+      }
+    },
+    series: [{
+      regression: true,
+      name: 'Test input',
+      color: 'rgba(223, 83, 83, .5)',
+      data: [
+        [1, 1],
+        [2, 3],
+        [3, 9],
+        [4, 8],
+        [5, 6],
+       
+      ]
+
+    }]
+  });
+});
 </script>
 @endsection

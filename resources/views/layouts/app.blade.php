@@ -10,6 +10,7 @@
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!-- Bootstrap core CSS     -->
@@ -22,12 +23,13 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/toastr.min.css') }}">
     <!-- PLUGIN: Datatables CSS -->
     <link href="{{ asset('DataTables/datatables.css') }}" rel="stylesheet" type="text/css">
 
     <!-- PLUGIN: Daterangepicker CSS -->
     <link href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css"/>
+
 
     @yield('css')
     
@@ -187,6 +189,7 @@
 
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="{{ asset('js/paper-dashboard.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/toastr.min.js') }}" type="text/javascript"></script>
 
 <!-- PLUGIN: Datatables JS -->
 <script src="{{ asset('DataTables/datatables.js') }}" type="text/javascript"></script>
@@ -194,7 +197,6 @@
 <!-- PLUGIN: Daterangepicker JS -->
 <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js" type="text/javascript" ></script>
 <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" type="text/javascript" ></script>
-
 
 @yield('script')
 
