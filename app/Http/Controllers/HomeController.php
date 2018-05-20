@@ -17,6 +17,37 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        if (!$this->getDefaultSemester()) {
+            $this->setDefaultSemester();
+        }
+    }
+
+    public function setDefaultSemester() {
+        $currentDate = date('Y-m-d');
+
+        try {
+            DB::beginTransaction();
+                
+                DB::table('semesters')
+                    ->whereDate('start_date', '<', $currentDate)
+                    ->whereDate('end_date', '>=', $currentDate)
+                    ->update(['is_default' => true]);
+
+            DB::commit();
+        } catch(Exception $e) {
+            DB::rollback();
+            $this->log($e);
+        }
+
+    }
+
+    public function getDefaultSemester() {
+        $defaultSem = DB::table('semesters')
+                        ->where('is_default', true)
+                        ->first();
+
+        return ($defaultSem === null)? false: $defaultSem;
     }
 
     /**
@@ -37,11 +68,16 @@ class HomeController extends Controller
                      ->select('books.b_title', 'books.b_edition', 'authors.a_name', 'books.b_itemid')
                      ->where('b_title', $request['title'])
                      ->first();
+
         return Response::json($book);
    }
     
    public function saveBorrowBook(Request $request)
-   {
+   {    
+
+
+       $defaultSem = $this->getDefaultSemester();
+
         $validatedData = $request->validate([
             'book_author' => 'required',
             'book_title' => 'required',
@@ -49,10 +85,10 @@ class HomeController extends Controller
         ]);
 
         DB::table('book_borrowings')->insert([
-            ['b_itemid' => $request['b_itemid'], 'b_date' => date('Y-m-d H:i:s')]
+            ['b_itemid' => $request['b_itemid'], 'b_date' => date('Y-m-d H:i:s'), 'semester_id' => $defaultSem->sem_id]
         ]);
 
-        return "success";
+        return Response::json(true);
    }
 
    

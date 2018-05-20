@@ -27,9 +27,10 @@ class BookController extends Controller
     {
         $books = array();
         $empty = array();
+
         $booksQuery = DB::table('books')
             ->join('book_categories', 'books.bc_id', '=', 'book_categories.bc_id')
-            ->select('books.*', 'book_categories.bc_desc')
+            // ->select('*', 'books.b')
             ->get();
 
         for($i=0; count($booksQuery) > $i; $i++) {

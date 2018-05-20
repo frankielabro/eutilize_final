@@ -27,10 +27,10 @@ class="active"
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Book RFID Code</label>
+                                    <label>Search for a book name</label>
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <input id="searchinpt" type="text" class="form-control border-input" placeholder="The RFID Code of the Book">
+                                            <input id="searchinpt" type="text" class="form-control border-input" placeholder="The Name of the Book">
                                         </div>
                                         <div class="col-md-4">
                                             <button id="searchbtn" class="btn btn-info btn-fill btn-block" type="button">Search</button>

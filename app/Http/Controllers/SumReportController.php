@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class SumReportController extends Controller
 {
@@ -26,6 +27,18 @@ class SumReportController extends Controller
         return view('summaryreport');
     }
 
+
+    public function getBookUtilizationById ($itemId) {
+
+        
+            
+        $books = DB::table('book_borrowings')
+                    ->where('b_itemId', $itemId)
+                    ->get();
+
+        $this->log($books);
+        return view('lineargraph');
+    }
    
     
 }

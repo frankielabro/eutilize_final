@@ -67,7 +67,11 @@ class SettingsController extends Controller
     public function semester(){
 
         $semesters = DB::table('semesters')->get();
-        return view('settings', ['semesters' => $semesters]);
+        $defaultSem = DB::table('semesters')
+                        ->where('is_default', true)
+                        ->first();
+
+        return view('settings', ['semesters' => $semesters, 'defaultSem' => $defaultSem]);
 
     }
 

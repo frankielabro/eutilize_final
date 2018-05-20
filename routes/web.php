@@ -75,3 +75,6 @@ Route::post('/saveBorrowBook', 'HomeController@saveBorrowBook');
 
 //ACTIVITY
 Route::get('/getActivityLogs', 'ActLogController@getActivityLogs');
+
+//GRAPHS
+Route::get('/procurement/book-utilization/{itemId}', 'SumReportController@getBookUtilizationById')->name('get-book-utilization');

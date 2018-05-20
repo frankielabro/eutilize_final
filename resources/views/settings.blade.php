@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sector')
-    Settings 
+    Semester Settings 
 @endsection
 
 @section('act-5')
@@ -18,13 +18,15 @@
                         <div class="header">
                             <div class="row">
                                 <div class="col-md-6" style=" width: fit-content; float: left;">
-                                    <h3 class="title pb-3">Semester Settings</h3>
+                                    <h3 class="title pb-3">Default semester: <span class="text-danger">{{ $defaultSem->sem_desc }} Sem, {{ $defaultSem->syr_desc }}</span></h3>
+
                                 </div>
                                 <div class="col-md-6 text-right" style="width: fit-content;float: right;">
                                     <button type="button" class="btn btn-primary btn-just-icon btn-fill" data-toggle="modal" data-target="#ADDMODAL">
                                         <i class="ti-plus"></i>
                                         SEM
                                     </button>
+                                    <button class="btn btn-outline-danger" type="button">Change default semester</button>
                                 </div>
                             </div>
 

@@ -59,7 +59,7 @@
                                                 <td>{{$booklist->bookNum}}</td>
                                                 <td>{{$booklist->itemId}}</td>
                                                 <td>{{$booklist->isbn}}</td>
-                                                <td>{{$booklist->title}}</td>
+                                                <td><a class="text-primary" href="/procurement/book-utilization/{{ $booklist->itemId }}">{{ $booklist->title }}</a></td>
                                                 <td>{{$booklist->edition}}</td>
                                                 <td>{{$booklist->category}}</td>
                                                 <td>{{$booklist->quantity}}</td>
