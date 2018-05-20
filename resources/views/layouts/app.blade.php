@@ -78,41 +78,41 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('procurement/book-shortages') }}" style="margin: 2px 2px;">
+                                    <a href="/procurement/book-shortages" style="margin: 2px 2px;">
                                         <i class="ti-clipboard"></i>
                                         <p>Book Shortage </p>
                                     </a>
                                 </li>
-                                <li class="parent">
-                                    <a data-toggle="collapse" href="#sub-item-2" class="" aria-expanded="false" style="margin-bottom: 0px;">
-                                        <i class="ti-ruler-pencil"></i>
-                                        <p>Graphs
-                                            <span>
-                                                <i class="ti-angle-down" style="float:right;"></i>
-                                            </span>
-                                        </p>
-                                    </a>
-                                    <ul class="children nav collapse" id="sub-item-2" aria-expanded="false" style="margin-top: 0px;padding-left: 15px;">
-                                        <li>
-                                            <a href="{{ route('lineargraph') }}" style="margin: 2px 2px;">
-                                                <i class="ti-stats-up"></i>
-                                                <p style="font-size: 10px;
-                                                            text-align: left;
-                                                            line-height: inherit;">
-                                                    Book Utilization Linear Graph</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('bargraph') }}" style="margin: 2px 2px;">
-                                                <i class="ti-bar-chart"></i>
-                                                <p style="font-size: 10px;
-                                                            text-align: left;
-                                                            line-height: inherit;">
-                                                    Category Utilization Bar Graph</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <!-- <li class="parent">
+                                        <a data-toggle="collapse" href="#sub-item-2" class="" aria-expanded="false" style="margin-bottom: 0px;">
+                                            <i class="ti-ruler-pencil"></i>
+                                            <p>Graphs
+                                                <span>
+                                                    <i class="ti-angle-down" style="float:right;"></i>
+                                                </span>
+                                            </p>
+                                        </a>
+                                        <ul class="children nav collapse" id="sub-item-2" aria-expanded="false" style="margin-top: 0px;padding-left: 15px;">
+                                            <li>
+                                                <a href="{{ route('lineargraph') }}" style="margin: 2px 2px;">
+                                                    <i class="ti-stats-up"></i>
+                                                    <p style="font-size: 10px;
+                                                                text-align: left;
+                                                                line-height: inherit;">
+                                                        Book Utilization Linear Graph</p>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('bargraph') }}" style="margin: 2px 2px;">
+                                                    <i class="ti-bar-chart"></i>
+                                                    <p style="font-size: 10px;
+                                                                text-align: left;
+                                                                line-height: inherit;">
+                                                        Category Utilization Bar Graph</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
                                 <li>
                                     <a href="{{ route('bookversion') }}" style="margin: 2px 2px;">
                                         <i class="ti-reload"></i>

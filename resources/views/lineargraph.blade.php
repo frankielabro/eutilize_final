@@ -257,7 +257,7 @@
                             },
                             tooltip: {
                               headerFormat: '<b>{series.name}</b><br>',
-                              pointFormat: '{point.x} cm, {point.y} kg'
+                              pointFormat: '{point.x} sem, {point.y} books utilized'
                             }
                           }
                         },

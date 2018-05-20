@@ -19,7 +19,7 @@ class ReplaceIsbnToItemidInSemAvrUtils extends Migration
             }
 
             if (!Schema::hasColumn('semester_avr_utils', 'b_itemid')) {
-                $table->integer('b_itemid')->unsigned()->references('b_itemid')->on('books');;
+                $table->integer('b_itemid')->unsigned()->references('b_itemid')->on('books');
             }
         });
     }

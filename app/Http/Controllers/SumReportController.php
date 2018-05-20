@@ -68,7 +68,39 @@ class SumReportController extends Controller
 
     }
 
-    public function ajaxGetSemAveUtilization ($itemId) {
+    public function generateBookShortages() {
+
+
+        $allBooks = DB::table('books')->get();
+        $shortages = [];
+        $count = 0;
+
+        foreach ($allBooks as $row) {
+            $data = $this->ajaxGetSemAveUtilization($row->b_itemid, false);
+            
+            if ($data['supplyQty'] <= $data['predictedQty']) {
+                $count++;
+                $arr = [
+                    'num' => $count,
+                    'b_itemid' => $row->b_itemid,
+                    'b_title' => $data['book']->b_title,
+                    'b_isbn' => $data['book']->b_isbn,
+                    'sem_desc' => $data['currentSem']->sem_desc,
+                    'syr_desc' => $data['currentSem']->syr_desc,
+                    'sem_id' => $data['currentSem']->sem_id,
+                    'predicted_qty' => $data['predictedQty'],
+                    'supply_qty' => $data['supplyQty'],
+                    'shortage_percentage' => round(abs($data['supplyQty']-$data['predictedQty'])/$data['predictedQty'], 2)
+                ];
+
+                array_push($shortages, $arr);
+            }
+        }
+
+        return view('shortages')->with(['shortages' => $shortages]);
+    }
+
+    public function ajaxGetSemAveUtilization ($itemId, $isAjax = true) {
 
         $bookUtils = DB::table('semester_avr_utils')
                         ->join('semesters', 'semesters.sem_id', '=', 'semester_avr_utils.sem_id')
@@ -94,21 +126,17 @@ class SumReportController extends Controller
         $predictedQty = round(($formulaVars[0] * $x) + $formulaVars[1], 4);
         $supplyQty = $book->b_qty * $schoolDays;
 
-        /**
-         * If predictedQty > supply,
-         * insert demand for next sem
-         */
-
-
         $data = [
-            'predictedQty' => round($predictedQty, 4),
+            'predictedQty' => round($predictedQty, 0),
+            'supplyQty' => $supplyQty,
+            'currentSem' => $currentSem,
             'book' => $book,
             'coordinates' => $coordinates,
             'bookUtils' => $bookUtils,
             'semesters' => $semesters
         ];
 
-        return Response::json($data);
+        return ($isAjax)? Response::json($data): $data;
     }
 
     public function getBookUtilizationById($itemId) {
