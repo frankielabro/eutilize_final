@@ -77,6 +77,12 @@
                                         <p>Summary Report</p>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('procurement/book-shortages') }}" style="margin: 2px 2px;">
+                                        <i class="ti-clipboard"></i>
+                                        <p>Book Shortage </p>
+                                    </a>
+                                </li>
                                 <li class="parent">
                                     <a data-toggle="collapse" href="#sub-item-2" class="" aria-expanded="false" style="margin-bottom: 0px;">
                                         <i class="ti-ruler-pencil"></i>

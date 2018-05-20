@@ -56,7 +56,6 @@ class BookController extends Controller
 
     public function addBook(Request $request){
 
-
          $books[] = (object) array(
                 'bookNum' => $i+1,
                 'itemId' => $booksQuery[$i]->b_itemid,
@@ -69,8 +68,6 @@ class BookController extends Controller
                 'category' => $booksQuery[$i]->bc_desc
             );
 
-
-
         $semester = DB::table('books')->insert([
 
             'b_itemid' => $sem_desc,
@@ -78,21 +75,11 @@ class BookController extends Controller
             'bc_id' => $dateRange[0],
             'b_rfid' => 0000,
             'b_title' => $dateRange[0],
-
-
-            
             'b_edition' => $dateRange[0],
-
             'bc_id' => $dateRange[0],
             'b_qty' => $dateRange[0],
 
         ]);
-
-
-
-
-
-
 
     }
 

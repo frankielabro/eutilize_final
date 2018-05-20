@@ -32,7 +32,6 @@
 
                             <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-
                         </div>
                     </div>
                 </div>
@@ -142,6 +141,8 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="itemId" id="itemId" value="{{ $itemId }}">
     <!-- PLOT MODAL START -->
 @endsection
 
@@ -188,80 +189,89 @@
 
 
         $(function() {
-  $('#container').highcharts({
-    chart: {
-      type: 'scatter',
-      zoomType: 'xy'
-    },
-    title: {
-      text: 'Basic default settings: linear regression with equation in the legend'
-    },
-    subtitle: {
-      text: 'Source: Heinz  2003'
-    },
-    xAxis: {
-      title: {
-        enabled: true,
-        text: 'Height (cm)'
-      },
-      startOnTick: true,
-      endOnTick: true,
-      showLastLabel: true
-    },
-    yAxis: {
-      title: {
-        text: 'Weight (kg)'
-      }
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'left',
-      verticalAlign: 'top',
-      x: 100,
-      y: 70,
-      floating: true,
-      backgroundColor: '#FFFFFF',
-      borderWidth: 1
-    },
-    plotOptions: {
-      scatter: {
-        marker: {
-          radius: 5,
-          states: {
-            hover: {
-              enabled: true,
-              lineColor: 'rgb(100,100,100)'
-            }
-          }
-        },
-        states: {
-          hover: {
-            marker: {
-              enabled: false
-            }
-          }
-        },
-        tooltip: {
-          headerFormat: '<b>{series.name}</b><br>',
-          pointFormat: '{point.x} cm, {point.y} kg'
-        }
-      }
-    },
-    series: [{
-      regression: true,
-      name: 'Test input',
-      color: 'rgba(223, 83, 83, .5)',
-      data: [
-        [1, 1],
-        [2, 3],
-        [3, 9],
-        [4, 8],
-        [5, 6],
-       
-      ]
+            let itemId = $('#itemId').val();
 
-    }]
-  });
-});
+            $.ajax({
+                type: 'GET',
+                url: `/procurement/ajax-get-book-utils/${itemId}'`,
+                success: function (fetchedData) {
+                    let { book } = fetchedData
+                    let coordinates = []
+                    
+                    console.log(fetchedData)
+
+                    if (fetchedData.coordinates !== undefined) {
+                        coordinates = fetchedData.coordinates
+                    }
+
+
+                    $('#container').highcharts({
+                        chart: {
+                          type: 'scatter',
+                          zoomType: 'xy'
+                        },
+                        title: {
+                          text: `Utilization of ${book.b_title}, ed. ${book.b_edition}`
+                        },
+                        xAxis: {
+                          title: {
+                            enabled: true,
+                            text: 'Semesters (x)'
+                          },
+                          startOnTick: true,
+                          endOnTick: true,
+                          showLastLabel: true
+                        },
+                        yAxis: {
+                          title: {
+                            text: 'Book Utilization (y)'
+                          }
+                        },
+                        legend: {
+                          layout: 'vertical',
+                          align: 'left',
+                          verticalAlign: 'top',
+                          x: 100,
+                          y: 70,
+                          floating: true,
+                          backgroundColor: '#FFFFFF',
+                          borderWidth: 1
+                        },
+                        plotOptions: {
+                          scatter: {
+                            marker: {
+                              radius: 5,
+                              states: {
+                                hover: {
+                                  enabled: true,
+                                  lineColor: 'rgb(100,100,100)'
+                                }
+                              }
+                            },
+                            states: {
+                              hover: {
+                                marker: {
+                                  enabled: false
+                                }
+                              }
+                            },
+                            tooltip: {
+                              headerFormat: '<b>{series.name}</b><br>',
+                              pointFormat: '{point.x} cm, {point.y} kg'
+                            }
+                          }
+                        },
+                        series: [{
+                          regression: true,
+                          name: 'Book Utilization',
+                          color: 'rgba(223, 83, 83, .5)',
+                          data: coordinates
+
+                        }]
+                    });
+
+                }
+            });
+        });
 </script>
 @endsection
