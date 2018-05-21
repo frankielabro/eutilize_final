@@ -28,15 +28,26 @@
                                 </div>
 
                         </div>
+                        @if (session('status'))
+                            <div class="alert alert-success" style="text-align: center;">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-success" style="text-align: center;">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="content table-responsive">
                             <table id="bookversion" class="display table table-hover">
                                 <thead>
                                     <th >No.</th>
-                                    <th width="50%">Book Title</th>
+                                    <th width="40%">Book Title</th>
                                     <th width="20%">Author</th>
                                     <th width="10%">Version On-Hand</th>
                                     <th width="10%">Latest Version</th>
                                     <th width="10%">Last Updated At</th>
+                                    <th width="10%">Action</th>
                                 </thead>
                                 <tbody>
 
@@ -58,14 +69,27 @@
 
                                     @if(count($bookslist) > 0)
 
-                                        @foreach($bookslist as $booklist)
+                                        @foreach($bookslist as $key => $book)
+                                            @php
+                                                $version = $book->bookVersions->last();
+                                                if (!$version) {
+                                                    $dispVersion = "_";
+                                                    $dispCreated = "_";
+                                                } else {
+                                                    $dispVersion = $version->version;
+                                                    $dispCreated = $version->created_at;
+                                                    }
+
+
+                                            @endphp
                                             <tr>
-                                                <td>{{$booklist->bookNum}}</td>
-                                                <td><a class="text-primary" href="/procurement/book-utilization/{{ $booklist->itemId }}">{{ $booklist->title }}</a></td>
-                                                <td>{{$booklist->author}}</td>
-                                                <td>{{$booklist->edition}}</td>
-                                                <td>0</td>
-                                                <td>0</td>
+                                                <td>{{$key}}</td>
+                                                <td><a class="text-primary" href="/procurement/book-utilization/{{ $book->b_itemid }}">{{ $book->b_title }}</a></td>
+                                                <td></td>
+                                                <td>{{$book->b_edition}}</td>
+                                                <td>{{$dispVersion}}</td>
+                                                <td>{{$dispCreated}}</td>
+                                                <td><a href='{{ "/scraper/"  . (int)$book->b_itemid}}'>Scrape</a></td>
                                             </tr>
                                         @endforeach
 

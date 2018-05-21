@@ -14,6 +14,8 @@ class BookVersion extends Model {
 
     protected $table = 'book_versions';
 
+    protected $fillable = ['url', 'version', 'description', 'b_itemid']; 
+
     public function book() {
         return $this->belongsTo(Book::class, 'b_itemid', 'b_itemid');
     }

@@ -167,10 +167,11 @@ class Scraper {
         $data          = $this->data;
         $editionValue  = '';
         $node          = $this->crawler->filter('body .biblio-info li label:contains("Edition statement")');
-        $parent        = $node->parents();
-        if (!$parent->count()) {
+        if (!$node->count()) {
             return false;
         }
+        $parent        = $node->parents();
+        
 
         $edition = $parent->filter('span')->first()->text();
 
