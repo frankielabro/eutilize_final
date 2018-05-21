@@ -266,7 +266,6 @@
                           name: 'Book Utilization',
                           color: 'rgba(223, 83, 83, .5)',
                           data: coordinates
-
                         }]
                     });
 

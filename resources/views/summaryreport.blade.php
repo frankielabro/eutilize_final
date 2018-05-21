@@ -31,99 +31,25 @@
                         <div class="content table-responsive">
                             <table id="summaryreport" class="display table table-hover">
                                 <thead>
-                                    <th>No.</th>
-                                    <th>Book Title</th>
-                                    <th>Book Category </th>
-                                    <th>Frequency</th>
-                                    <th>Date</th>
+                                    <th>Item ID</th>
+                                    <th>ISBN </th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Edition</th>
+                                    <th>Number Used</th>
                                 </thead>
                                 <tbody>
 
-                                    <!-- START OF PHP FOR LOOP  -->
-                                    <!-- 
+                                     @foreach ($books as $book)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Book of Death</td>
-                                            <td>003</td>
-                                            <td>Daily</td>
-                                            <td>Date</td>
+                                            <td> {{ $book->book_itemid }} </td>
+                                            <td> {{ $book->book_isbnid }} </td>
+                                            <td> {{ $book->book_title }} </td>
+                                            <td> {{ $book->book_category }} </td>
+                                            <td> {{ $book->book_edition }} </td>
+                                            <td> {{ $book->countbookid }} </td>
                                         </tr>
-                                     -->
-                                    <!-- END OF PHP FOR LOOP  -->
-
-                                    <!-- START OF SAMPLE DATA  -->
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Book of Death</td>
-                                        <td>700 — Arts and recreation</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Book of Death</td>
-                                        <td>000 — Computer science, information and general works</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Book of Death</td>
-                                        <td>700 — Arts and recreation</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Book of Death</td>
-                                        <td>000 — Computer science, information and general works</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Book of Death</td>
-                                        <td>700 — Arts and recreation</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Book of Death</td>
-                                        <td>000 — Computer science, information and general works</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Book of Death</td>
-                                        <td>700 — Arts and recreation</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td>Book of Death</td>
-                                        <td>000 — Computer science, information and general works</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>9</td>
-                                        <td>Book of Death</td>
-                                        <td>700 — Arts and recreation</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10</td>
-                                        <td>Book of Death</td>
-                                        <td>000 — Computer science, information and general works</td>
-                                        <td>Daily</td>
-                                        <td>01 / 25 / 2018</td>
-                                    </tr>
-                        
-                                    <!-- END OF SAMPLE DATA  -->
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -139,92 +65,50 @@
 
 @section('modal')
     <!-- MODAL START -->
-        <!-- ADD MODAL START -->
+  
         <div class="modal fade" id="FILTERMODAL" tabindex="-1" role="dialog" aria-hidden="true">
+
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="exampleModalLongTitle">Filtering the Reports...</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <h5 style="font-weight: bold;">STARTING FROM :</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Semester</label>
-                                        <div class="input-group mb-3" style="width:100%;">
-                                            <select class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                <option selected hidden>Choose Semester...</option>
-                                                <option value="1">1st Semester</option>
-                                                <option value="2">2nd Semester</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School Year</label>
-                                        <div class="input-group mb-3" style="width:100%;">
-                                            <select id="STARTSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                <option selected hidden>Choose Semester...</option>
-                                                <!-- Sample Selection options --> 
-                                                <option value="1">2019 - 2020</option>
-                                                <option value="2">2018 - 2019</option>
-                                                <!-- Sample Selection options --> 
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <h5 style="font-weight: bold;">ENDING TO :</h5>
-                            <div class="row"> 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Semester</label>
-                                        <div class="input-group mb-3" style="width:100%;">
-                                            <select class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                <option selected hidden>Choose Semester...</option>
-                                                <option value="1">1st Semester</option>
-                                                <option value="2">2nd Semester</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>School Year</label>
-                                        <div class="input-group mb-3" style="width:100%;">
-                                            <select id="ENDSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
-                                                <option selected hidden>Choose Semester...</option>
-                                                <!-- Sample Selection options --> 
-                                                <option value="1">2019 - 2020</option>
-                                                <option value="2">2018 - 2019</option>
-                                                <!-- Sample Selection options --> 
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="row"> 
-                            <div class="col-md-8">
-                                <div id="notify" hidden class="alert alert-warning text-left" style="background-color: #a77c33; margin:0px;">
-                                    <span style="color: white;"><b> Warning - </b> " The schoolyear must not be equal "</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                                <button type="button" id="filterbtn" class="btn btn-primary btn-fill" disabled>Filter</button>
-                            </div>
+
+                <form method="POST" action="{{ URL::to('/summaryreport/filter') }}">
+                    
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header"> 
+                            <h4 class="modal-title">Adding Semester...</h4>
                         </div>
+
+                        <div class="modal-body">
+                            <select name="sem_id" class="custom-select form-control border-input"  style="border: 1px solid #ccc; border-radius: 4px;">
+                                    @foreach ($semesters as $semester)
+                                        <option value="{{ $semester->sem_id }}">
+                                            @if( $semester->sem_desc == '1st')
+                                              {{$semester->sem_desc}} Semester 
+                                            @else
+                                               {{$semester->sem_desc}} Semester
+                                            @endif
+                                            <span> | </span> 
+                                            {{ $semester->syr_desc }} 
+                                            <span> | </span> 
+                                             {{ $semester->start_date }} /  {{ $semester->end_date }}
+                                        </option>
+                                    @endforeach
+                                </select> 
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+
                     </div>
-                </div>
+
+                </form> 
+
             </div>
         </div>
-        <!-- ADD MODAL START -->
     <!-- MODAL END -->
 @endsection
 
@@ -252,31 +136,6 @@
                 }
             ]
         });
-
-        var $startsy = $('#STARTSY');
-        var $endsy = $('#ENDSY');
-        var $notify = $('#notify');
-        var $filterbtn = $('#filterbtn');
-
-        $startsy.on('change', function() {
-            if(this.value != $endsy.val()){
-                $filterbtn.prop('disabled', false);
-                $notify.hide();
-            }else{
-                $filterbtn.prop('disabled', true);
-                $notify.show();
-            }
-        })
-        $endsy.on('change', function() {
-            if(this.value != $startsy.val()){
-                $filterbtn.prop('disabled', false);
-                $notify.hide();
-            }else{
-                $filterbtn.prop('disabled', true);
-                $notify.show();
-            }
-        })
-
 
     });
 

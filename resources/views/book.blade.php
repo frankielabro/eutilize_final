@@ -172,6 +172,8 @@
                                                 <option value="6">500 — Science</option>
                                                 <option value="7">600 — Technology and applied science</option>
                                                 <option value="8">700 — Arts and recreation</option>
+                                                <option value="9">800 — Literature</option>
+                                                <option value="10">900 — History and Geography</option>
                                             </select>
                                         </div>
                                     </div>

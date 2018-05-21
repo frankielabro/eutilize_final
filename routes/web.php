@@ -50,6 +50,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('main');
 Route::get('/summaryreport', 'SumReportController@summaryreport')->name('summaryreport');
+Route::post('/summaryreport/filter', 'SumReportController@filtersummaryreport');
 Route::get('/lineargraph', 'LneGrhController@lineargraph')->name('lineargraph');    
 Route::get('/bargraph', 'BarGrhController@bargraph')->name('bargraph');     
 Route::get('/bookversion', 'BookVerController@bookversion')->name('bookversion');

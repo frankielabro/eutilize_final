@@ -25,8 +25,86 @@ class SumReportController extends Controller
      */
     public function summaryreport()
     {
-        return view('summaryreport');
+
+        $distinctbooks = DB::table('book_borrowings')
+                    ->join('books', 'book_borrowings.b_itemid', '=', 'books.b_itemid')
+                    ->select('books.*', 'book_borrowings.b_itemid')
+                    ->distinct(['b_itemid'])
+                    ->get();
+
+        $books = array();
+
+
+        $semester_default = DB::table('semesters')->where('is_default',1)->first();
+
+        foreach ($distinctbooks as $distinctbook) {
+            $list['book_itemid'] = $distinctbook->b_itemid;
+            $list['book_isbnid'] = $distinctbook->b_isbn;
+            $list['book_title'] = $distinctbook->b_title;
+            $list['book_category'] = $this->getcategory($distinctbook->bc_id);
+            $list['book_edition'] = $distinctbook->b_edition;
+            $list['countbookid'] = $this->countbookid($distinctbook->b_itemid , $semester_default->sem_id);
+            $books[] = (object)$list;
+        }
+
+        $semesters = DB::table('semesters')->get();
+
+        return view('summaryreport', ['books' => $books, 'semesters' => $semesters, 'index' => 1]);
+
     }
+
+    public function filtersummaryreport(Request $request){
+
+        $distinctbooks = DB::table('book_borrowings')
+                        ->join('books', 'book_borrowings.b_itemid', '=', 'books.b_itemid')
+                        ->select('books.*', 'book_borrowings.b_itemid')
+                        ->distinct(['b_itemid'])
+                        ->get();
+
+        $books = array();
+
+        foreach ($distinctbooks as $distinctbook) {
+            $list['book_itemid'] = $distinctbook->b_itemid;
+            $list['book_isbnid'] = $distinctbook->b_isbn;
+            $list['book_title'] = $distinctbook->b_title;
+            $list['book_category'] = $this->getcategory($distinctbook->bc_id);
+            $list['book_edition'] = $distinctbook->b_edition;
+            $list['countbookid'] = $this->countbookid($distinctbook->b_itemid,$request->input('sem_id'));
+            $books[] = (object)$list;
+        }
+
+        $semesters = DB::table('semesters')->get();
+
+        return view('summaryreport', ['books' => $books, 'semesters' => $semesters, 'index' => 1]);
+    }
+
+
+    public function countbookid($b_itemid , $sem_id){
+
+        $browser_total_raw = DB::raw('count(*) as total');
+
+        $count_id = DB::table('book_borrowings')
+                     ->select($browser_total_raw)
+                     ->where('b_itemid',$b_itemid)
+                     ->where('semester_id','=',$sem_id)
+                     ->pluck('total')
+                     ->first();
+
+        return $count_id;
+
+    }
+
+    public function getcategory($bc_id){
+
+        $getcategory = DB::table('book_categories')
+                     ->select('bc_desc')
+                     ->where('bc_id',$bc_id)
+                     ->first();
+
+        return $getcategory->bc_desc;
+
+    }
+
 
     public function getMean($sum, $numRows) {
         return ($sum/$numRows);

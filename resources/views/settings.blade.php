@@ -26,7 +26,6 @@
                                         <i class="ti-plus"></i>
                                         SEM
                                     </button>
-                                    <button class="btn btn-outline-danger" type="button">Change default semester</button>
                                 </div>
                             </div>
 

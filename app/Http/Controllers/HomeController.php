@@ -30,8 +30,8 @@ class HomeController extends Controller
             DB::beginTransaction();
                 
                 DB::table('semesters')
-                    ->whereDate('start_date', '<', $currentDate)
-                    ->whereDate('end_date', '>=', $currentDate)
+                    ->where('start_date', '<', $currentDate)
+                    ->where('end_date', '>=', $currentDate)
                     ->update(['is_default' => true]);
 
             DB::commit();
@@ -62,12 +62,16 @@ class HomeController extends Controller
     
    public function search_book_title(Request $request)
    {
+
+        $searchvalue = $request->input('searchvalue');
+
         $book = DB::table('author_books')
                      ->join('books', 'author_books.b_itemid', '=', 'books.b_itemid')
                      ->join('authors', 'author_books.a_id', '=', 'authors.a_id')
                      ->select('books.b_title', 'books.b_edition', 'authors.a_name', 'books.b_itemid')
-                     ->where('b_title', $request['title'])
-                     ->first();
+                     ->where('b_title','like', '%' .$searchvalue. '%')
+                     ->orWhere('a_name','like', '%' .$searchvalue. '%')
+                     ->get();
 
         return Response::json($book);
    }
@@ -75,14 +79,7 @@ class HomeController extends Controller
    public function saveBorrowBook(Request $request)
    {    
 
-
        $defaultSem = $this->getDefaultSemester();
-
-        $validatedData = $request->validate([
-            'book_author' => 'required',
-            'book_title' => 'required',
-            'book_version' => 'required',
-        ]);
 
         DB::table('book_borrowings')->insert([
             ['b_itemid' => $request['b_itemid'], 'b_date' => date('Y-m-d H:i:s'), 'semester_id' => $defaultSem->sem_id]

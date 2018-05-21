@@ -42,11 +42,10 @@
                                     </tr>
                                     @endforeach
 
-                                 
-
-                                    <!-- END OF SAMPLE DATA  -->
                                 </tbody>
                             </table>
+                            <div class="pull-right">{{ $books->links() }}</div> 
+
                         </div>
 
                     </div>
@@ -64,6 +63,9 @@
                 "lengthChange": false,
                 "pageLength": 10,
             });
+
+
+
         });
 </script>
 @endsection
