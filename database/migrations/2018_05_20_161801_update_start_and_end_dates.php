@@ -16,16 +16,16 @@ class UpdateStartAndEndDates extends Migration
         Schema::table('semesters', function (Blueprint $table) {
             if (Schema::hasColumn('semesters', 'start_date')) {
                 $table->dropColumn('start_date');
-            } else {
-                $table->date('start_date')->nullable();   
-            }
+            } 
 
             if (Schema::hasColumn('semesters', 'end_date')) {
                 $table->dropColumn('end_date');
-            } else {
-                $table->date('end_date')->nullable();
             }
-            
+        });
+
+        Schema::table('semesters', function (Blueprint $table) {
+                $table->date('end_date')->nullable();
+                $table->date('start_date')->nullable();
         });
 
     }

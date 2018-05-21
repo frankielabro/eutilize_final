@@ -23,33 +23,6 @@ class HomeController extends Controller
         }
     }
 
-    public function setDefaultSemester() {
-        $currentDate = date('Y-m-d');
-
-        try {
-            DB::beginTransaction();
-                
-                DB::table('semesters')
-                    ->where('start_date', '<', $currentDate)
-                    ->where('end_date', '>=', $currentDate)
-                    ->update(['is_default' => true]);
-
-            DB::commit();
-        } catch(Exception $e) {
-            DB::rollback();
-            $this->log($e);
-        }
-
-    }
-
-    public function getDefaultSemester() {
-        $defaultSem = DB::table('semesters')
-                        ->where('is_default', true)
-                        ->first();
-
-        return ($defaultSem === null)? false: $defaultSem;
-    }
-
     /**
      * Show the application dashboard.
      *

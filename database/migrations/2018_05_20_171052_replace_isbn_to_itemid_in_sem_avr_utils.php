@@ -33,8 +33,8 @@ class ReplaceIsbnToItemidInSemAvrUtils extends Migration
     {
         Schema::table('semester_avr_utils', function (Blueprint $table) {
             if (Schema::hasColumn('semester_avr_utils', 'b_itemid')) {
+                //$table->dropForeign(['semester_id']);
                 $table->dropColumn('b_itemid');
-                $table->dropForeign(['semester_id']);
             }
 
             if (!Schema::hasColumn('semester_avr_utils', 'b_isbn')) {
