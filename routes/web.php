@@ -81,3 +81,7 @@ Route::get('/getActivityLogs', 'ActLogController@getActivityLogs');
 Route::get('/procurement/book-utilization/{itemId}', 'SumReportController@getBookUtilizationById')->name('get-book-utilization');
 Route::get('/procurement/ajax-get-book-utils/{itemId}', 'SumReportController@ajaxGetSemAveUtilization')->name('get-book-utilization-ajax');
 Route::get('/procurement/book-shortages', 'SumReportController@generateBookShortages')->name('get-book-shortages');
+
+//SCRAPER METHODS, IMPLEMENT THESE
+//Route::get('scraper', 'ScraperController@index');
+//Route::post('scraper', 'ScraperController@search');
