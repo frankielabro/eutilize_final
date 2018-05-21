@@ -32,10 +32,11 @@
                             <table id="bookversion" class="display table table-hover">
                                 <thead>
                                     <th >No.</th>
-                                    <th width="25%">Book Title</th>
-                                    <th width="25%">Book Category</th>
-                                    <th width="25%">Version On-Hand</th>
-                                    <th width="25%">Latest Version</th>
+                                    <th width="50%">Book Title</th>
+                                    <th width="20%">Author</th>
+                                    <th width="10%">Version On-Hand</th>
+                                    <th width="10%">Latest Version</th>
+                                    <th width="10%">Last Updated At</th>
                                 </thead>
                                 <tbody>
 
@@ -52,7 +53,31 @@
                                     <!-- END OF PHP FOR LOOP  -->
 
                                     <!-- START OF SAMPLE DATA  -->
-                                    <tr>
+
+
+
+                                    @if(count($bookslist) > 0)
+
+                                        @foreach($bookslist as $booklist)
+                                            <tr>
+                                                <td>{{$booklist->bookNum}}</td>
+                                                <td><a class="text-primary" href="/procurement/book-utilization/{{ $booklist->itemId }}">{{ $booklist->title }}</a></td>
+                                                <td>{{$booklist->author}}</td>
+                                                <td>{{$booklist->edition}}</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+                                        @endforeach
+
+                                        @else
+
+                                        <div class="alert alert-success">
+                                            <b><h2>There are no data</h2></b>
+                                        </div>
+
+                                    @endif
+
+                                    <!-- <tr>
                                         <td>1</td>
                                         <td>Book of Death</td>
                                         <td>700 — Arts and recreation</td>
@@ -143,7 +168,7 @@
                                         <td>Daily</td>
                                         <td>Daily</td>
                                     </tr>
-
+ -->
                                     <!-- END OF SAMPLE DATA  -->
 
                                 </tbody>

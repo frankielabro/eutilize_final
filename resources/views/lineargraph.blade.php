@@ -42,7 +42,7 @@
 
 @section('modal')
     <!-- PLOT MODAL START -->
-    <div class="modal fade" id="PLOTMODAL" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- <div class="modal fade" id="PLOTMODAL" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -85,10 +85,10 @@
                                         <div class="input-group mb-3" style="width:100%;">
                                             <select id="STARTSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
                                                 <option selected hidden>Choose Semester...</option>
-                                                <!-- Sample Selection options --> 
+                                                <!- - Sample Selection options --> 
                                                 <option value="1">2019 - 2020</option>
                                                 <option value="2">2018 - 2019</option>
-                                                <!-- Sample Selection options --> 
+                                                Sample Selection options 
                                             </select>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-md-4">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" id="filterbtn" class="btn btn-primary btn-fill">Plot</button>
+                            <!-- <button type="button" id="filterbtn" class="btn btn-primary btn-fill">Plot</button> -->
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <input type="hidden" name="itemId" id="itemId" value="{{ $itemId }}">
+    <input type="hidden" name="itemId" id="itemId" value="{{ $itemId }}"> -->
     <!-- PLOT MODAL START -->
 @endsection
 
