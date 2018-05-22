@@ -83,13 +83,13 @@
 
                                             @endphp
                                             <tr>
-                                                <td>{{$key}}</td>
+                                                <td>{{$key+1}}</td>
                                                 <td><a class="text-primary" href="/procurement/book-utilization/{{ $book->b_itemid }}">{{ $book->b_title }}</a></td>
                                                 <td></td>
                                                 <td>{{$book->b_edition}}</td>
                                                 <td>{{$dispVersion}}</td>
                                                 <td>{{$dispCreated}}</td>
-                                                <td><a href='{{ "/scraper/"  . (int)$book->b_itemid}}'>Scrape</a></td>
+                                                <td><a class="btn btn-primary" href='{{ "/scraper/"  . (int)$book->b_itemid}}'>Scrape</a></td>
                                             </tr>
                                         @endforeach
 
