@@ -186,18 +186,20 @@ class SumReportController extends Controller
                         ->get();
 
         $coordinates = [];
+        $count = 0;
 
         foreach ($bookUtils as $row) {
-            $coordinates[] = [$row->sem_id, $row->b_avrutil]; 
+            $coordinates[] = [++$count, $row->b_avrutil]; 
         }
 
         $semesters = DB::table('semesters')->get();
         $currentSem = DB::table('semesters')->orderBy('sem_id', 'DESC')->first();
+
         $book = DB::table('books')
             ->join('author_books', 'author_books.b_itemid', '=', 'books.b_itemid')
             ->join('authors', 'author_books.a_id', '=', 'authors.a_id')
             ->select('books.*', 'author_books.*', 'authors.*')
-            ->where('books.b_itemid', '=',$itemId)
+            ->where('books.b_itemid', '=', $itemId)
             ->first();
 
         $formulaVars = $this->calculateLeastSquares($bookUtils);
@@ -206,8 +208,11 @@ class SumReportController extends Controller
         $schoolDays = 110;
 
         // y = mx + b
-        $predictedQty = round( ( ($formulaVars[0] * $x) + $formulaVars[1])/110, 4);
         // $supplyQty = $book->b_qty * $schoolDays;
+
+        $predictedQty = round((($formulaVars[0] * $x) + $formulaVars[1]), 4);
+
+        $coordinates[] = [++$count, $predictedQty];
 
         $data = [
             'predictedQty' => round($predictedQty, 0),
@@ -218,6 +223,7 @@ class SumReportController extends Controller
             'bookUtils' => $bookUtils,
             'semesters' => $semesters
         ];
+
 
         return ($isAjax)? Response::json($data): $data;
     }
