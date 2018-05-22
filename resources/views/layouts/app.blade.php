@@ -44,9 +44,7 @@
             <div class="sidebar" data-background-color="white" data-active-color="success">
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <img src="https://wrappixel.com/demos/admin-templates/ampleadmin/plugins/images/admin-logo-dark.png" alt="home" class="light-logo"
-                            height="45px" width="45px">
-                        <img src="https://wrappixel.com/demos/admin-templates/ampleadmin/plugins/images/admin-text-dark.png" alt="home" class="light-logo">
+                        <img src="{{ asset('images/logo.png') }}" alt="home" class="light-logo" width="100%">
                     </div>
                     <ul class="nav">
                         <li @yield('act-1')>

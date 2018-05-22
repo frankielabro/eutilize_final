@@ -26,6 +26,8 @@
                                         <i class="ti-plus"></i>
                                         BOOK
                                     </button>
+
+                                    <button type="button" class="btn btn-outline-primary" id="book-util-pls">Generate Book Utilization for Current Semester</button>
                                 </div>
                             </div>
 
@@ -315,6 +317,28 @@
 
 @section('script')
     <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#book-util-pls').on('click', function (e) {
+            e.preventDefault()
+            $('#book-util-pls').html("Please wait...")
+            $('#book-util-pls').attr('disabled', true)
+
+            $.ajax({
+                type: "GET",
+                url: '/procurement/generate-book-utilization',
+                success: function (data) {
+                    $('#book-util-pls').html("Book generation done.")
+                    $('#book-util-pls').attr('disabled', true)
+                },
+                error: function (data, textStatus, errorThrown) {
+                    $('#book-util-pls').html("Something went wrong. Please try again.");
+                }
+            });
+
+        })
+    })
+
     var globalItemId = '';
     var baseURL = "{{url('/')}}";
     $(document).ready(function () {

@@ -20,7 +20,6 @@
                                 <div class="col-md-6" style=" width: fit-content; float: left;">
                                     <h3 class="title pb-3">Activity Log</h3>
                                 </div>
-                               
                             </div>
                         </div>
                         <div class="content table-responsive">
@@ -57,15 +56,23 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#generate').on('çlick', function (e) {
+                e.preventDefault();
+
+                console.log('clicked')
+            })
+        })
+    </script>
     <script>
         $(document).ready(function () {
+
+            console.log('looooo')
             $('#activitylog').DataTable({
                 "lengthChange": false,
                 "pageLength": 10,
             });
-
-
-
         });
 </script>
 @endsection

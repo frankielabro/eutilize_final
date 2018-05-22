@@ -220,6 +220,63 @@ class SumReportController extends Controller
     public function getBookUtilizationById($itemId) {
         return view('lineargraph')->with(['itemId' => $itemId]);
     }
+
+
+    public function ajaxGenerateBookUtilization () {
+
+        $defaultSem = $this->getDefaultSemester();
+
+        $book_borrowings = DB::table('book_borrowings')
+                            ->where('semester_id', $defaultSem->sem_id)
+                            ->get();
+
+        $count_books = [];
+
+        foreach ($book_borrowings as $book) {
+            if (!in_array($book->b_itemid, array_keys($count_books))) {
+                $count_books[$book->b_itemid] = 1;
+            } else {
+                $count_books[$book->b_itemid]++;                
+            }
+        }
+
+        try {
+
+            DB::beginTransaction();
+
+            foreach($count_books as $key => $count) {
+
+                $semAvr = DB::table('semester_avr_utils')
+                            ->where('b_itemid', $key)
+                            ->where('sem_id', $defaultSem->sem_id)
+                            ->first();
+
+                if ($semAvr !== null) {
+                    DB::table('semester_avr_utils')
+                        ->where('id', $semAvr->id)
+                        ->update(['b_avrutil' => $count]);
+
+                } else {
+                    $data = [
+                        'b_avrutil' => $count,
+                        'sem_id' => $defaultSem->sem_id,
+                        'b_itemid' => $key
+                    ];
+
+                    DB::table('semester_avr_utils')
+                        ->insert($data);
+                }
+
+            }
+
+            DB::commit();
+        } catch(\Exception $e) {
+            $this->log("rollback sya dzai");
+            DB::rollback();
+        }
+
+        return Response::json(true);
+    }
    
     
 }
