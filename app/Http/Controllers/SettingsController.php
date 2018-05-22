@@ -9,6 +9,7 @@ use DB;
 class SettingsController extends Controller
 {
     /**
+     *   
      * Create a new controller instance.
      *
      * @return void
