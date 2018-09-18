@@ -21,9 +21,9 @@
                                             <h3 class="title pb-3">Book Version</h3>
                                         </div>
                                         <div class="col-md-6 text-right" style="width: fit-content;float: right;">
-                                            <button type="button" class="btn btn-primary btn-just-icon" data-toggle="modal" data-target="#ADDMODAL">
+                                           <!--  <button type="button" class="btn btn-primary btn-just-icon" data-toggle="modal" data-target="#ADDMODAL">
                                                 <i class="ti-reload"></i>
-                                            </button>
+                                            </button> -->
                                         </div>
                                 </div>
 

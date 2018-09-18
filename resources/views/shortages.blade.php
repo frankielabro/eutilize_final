@@ -32,10 +32,10 @@
                             <table id="summaryreport" class="display table table-hover">
                                 <thead>
                                     <th>No.</th>
-                                    <th>Book ISBN </th>
+                                    <th>Book Id </th>
                                     <th>Book Title</th>
                                     <th>Predicted Quantity</th>
-                                    <th>Supply Quantity</th>
+                                    <th>Quantity On-hand</th>
                                     <th>Shortage Percentage</th>
                                     <th>Last Semester</th>
                                 </thead>
@@ -79,11 +79,7 @@
                     text: 'Print',
                     title: "",
                     message: '<h2 class="text-center mb-2">E-Utilize</h2><h3 class="text-center mb-4"> Summary Report</h3>',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
+                    
                 }
             ]
         });

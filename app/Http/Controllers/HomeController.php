@@ -61,5 +61,19 @@ class HomeController extends Controller
         return Response::json(true);
    }
 
+   public function saveRfid(Request $request) {
+        // $rfid = DB::table('rfid')->insert([
+        //     'rfid_code' => 'RFID-' . rand(1, 1000) . '-' . rand(1, 10000) . '-' . date('Y-m-d')
+        // ]);
+
+        $getLatestRow = DB::table('rfid')->max('id');
+
+        DB::table('rfid')->truncate();
+
+        $searchBook = DB::table('books')->where('b_itemid', $rfid)->get();
+
+        return response()->json($searchBook);
+   }
+
    
 }

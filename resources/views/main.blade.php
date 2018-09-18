@@ -210,6 +210,30 @@ class="active"
           "hideMethod": "fadeOut"
         }
 
+        function loadInsertedData() {
+            $.get('/saveRfid', function(data) {
+               $('#searchvalue').val(data[0].b_title);
+            });
+        }
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '/saveRfid',
+        //         data: { _token: '{{csrf_token()}}' },
+        //         success: function(response)
+        //         {
+        //             console.log(response);
+        //         },
+        //         error: function(response)
+        //         {
+        //             console.log(response.responseJSON);
+        //             $.each(response.responseJSON.errors, function( index, value ) {
+        //                 toastr.error(value)
+        //             });
+        //         }
+        //     });
+        // }
+
+        setInterval(function(){ loadInsertedData() }, 3000);
 
         // $.ajaxSetup({
         //     headers: {

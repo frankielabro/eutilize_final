@@ -73,6 +73,7 @@ Route::post('/semester/update', 'SettingsController@updateSemester');
 //HOME
 Route::post('/searchBookTitle', 'HomeController@search_book_title');
 Route::post('/saveBorrowBook', 'HomeController@saveBorrowBook');
+Route::get('/saveRfid', 'HomeController@saveRfid');
 
 //ACTIVITY
 Route::get('/getActivityLogs', 'ActLogController@getActivityLogs');

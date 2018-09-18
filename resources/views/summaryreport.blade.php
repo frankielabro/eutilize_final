@@ -32,7 +32,7 @@
                             <table id="summaryreport" class="display table table-hover">
                                 <thead>
                                     <th>Item ID</th>
-                                    <th>ISBN </th>
+                                    <!-- <th>ISBN </th> -->
                                     <th>Title</th>
                                     <th>Category</th>
                                     <th>Edition</th>
@@ -43,7 +43,7 @@
                                      @foreach ($books as $book)
                                         <tr>
                                             <td> {{ $book->book_itemid }} </td>
-                                            <td> {{ $book->book_isbnid }} </td>
+                                            <!-- <td> {{ $book->book_isbnid }} </td> -->
                                             <td> {{ $book->book_title }} </td>
                                             <td> {{ $book->book_category }} </td>
                                             <td> {{ $book->book_edition }} </td>
@@ -77,7 +77,7 @@
                     <div class="modal-content">
 
                         <div class="modal-header"> 
-                            <h4 class="modal-title">Adding Semester...</h4>
+                            <h4 class="modal-title">Filtering by Semester...</h4>
                         </div>
 
                         <div class="modal-body">
@@ -100,7 +100,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary">Filter</button>
                         </div>
 
                     </div>
@@ -128,11 +128,7 @@
                     text: 'Print',
                     title: "",
                     message: '<h2 class="text-center mb-2">E-Utilize</h2><h3 class="text-center mb-4"> Summary Report</h3>',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
+                    
                 }
             ]
         });

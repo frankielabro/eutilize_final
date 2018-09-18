@@ -96,8 +96,9 @@ class BookController extends Controller
             ->where('b_itemid', $request->input('itemIdHiddenInput'))
             ->update([
                 'b_itemid' => $request->input('itemIdInputName'),
-                'b_title' => $request->input('titleInputName')  ,
+                'b_title' => $request->input('titleInputName'),
                 'b_edition' => $request->input('versionInputName'),
+                'b_qty' => $request->input('quantityInputName'),
                 'bc_id' => $request->input('bookSelectName'),
             ]);
 
@@ -109,13 +110,15 @@ class BookController extends Controller
                 ->get();
 
             for($i=0; count($booksQuery) > $i; $i++) {
-                $books[] = (object) array('bookNum' => $i+1,
+                $books[] = (object) array(
+                    'bookNum' => $i+1,
                     'itemId' => $booksQuery[$i]->b_itemid,
                     'isbn' => $booksQuery[$i]->b_isbn,
                     'bcId' => $booksQuery[$i]->bc_id,
                     'bRfid' => $booksQuery[$i]->b_rfid,
                     'title' => $booksQuery[$i]->b_title,
                     'edition' => $booksQuery[$i]->b_edition,
+                    'quantity' => $booksQuery[$i]->b_qty,
                     'category' => $booksQuery[$i]->bc_desc
                 );
             }

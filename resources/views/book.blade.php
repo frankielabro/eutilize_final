@@ -243,6 +243,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -257,6 +258,15 @@
                                     <div class="form-group">
                                         <label>Book Version</label>
                                         <input type="text" class="form-control border-input" name="versionInputName" id="versionInput" placeholder="The Version of the Book">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="text" class="form-control border-input" name="quantityInputName" id="quantityInput" placeholder="Quantity of the Book">
                                     </div>
                                 </div>
                             </div>
@@ -276,6 +286,9 @@
                                                 <option value="500">500 — Science</option>
                                                 <option value="600">600 — Technology and applied science</option>
                                                 <option value="700">700 — Arts and recreation</option>
+                                                <option value="8">700 — Arts and recreation</option>
+                                                <option value="9">800 — Literature</option>
+                                                <option value="10">900 — History and Geography</option>
                                             </select>
                                         </div>
                                     </div>
@@ -360,6 +373,7 @@
             $('#titleInput').val(data[0].b_title);
             $('#authorInput').val(data[0].b_itemid);
             $('#versionInput').val(data[0].b_edition);
+            $('#quantityInput').val(data[0].b_qty);
             $("div#bookCategory select").val(String(data[0].bc_id));
             $("#itemIdHidden").val(data[0].b_itemid);
         });

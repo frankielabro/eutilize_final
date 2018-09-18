@@ -21,16 +21,13 @@
                                     <h3 class="title pb-3">Linear Graph</h3>
                                 </div>
                                 <div class="col-md-6 text-right" style="width: fit-content;float: right;">
-                                    <button type="button" class="btn btn-primary btn-just-icon btn-fill" data-toggle="modal" data-target="#PLOTMODAL">
-                                        <i class="ti-ruler-pencil"></i>
-                                        PLOT
-                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="content table-responsive">
 
-                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                            <div id="container" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
 
                         </div>
                     </div>
@@ -86,7 +83,7 @@
                                             <select id="STARTSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
                                                 <option selected hidden>Choose Semester...</option>
                                                 <!- - Sample Selection options --> 
-                                                <option value="1">2019 - 2020</option>
+                        <!--                         <option value="1">2019 - 2020</option>
                                                 <option value="2">2018 - 2019</option>
                                                 Sample Selection options 
                                             </select>
@@ -115,10 +112,10 @@
                                             <select id="ENDSY" class="custom-select form-control border-input" id="bookcategory" style="border: 1px solid #ccc; border-radius: 4px;">
                                                 <option selected hidden>Choose Semester...</option>
                                                 <!-- Sample Selection options --> 
-                                                <option value="1">2019 - 2020</option>
+                                               <!--  <option value="1">2019 - 2020</option>
                                                 <option value="2">2018 - 2019</option>
                                                 <!-- Sample Selection options --> 
-                                            </select>
+              <!--                               </select>
                                         </div>
                                     </div>
                                 </div>
@@ -135,14 +132,14 @@
                         <div class="col-md-4">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <!-- <button type="button" id="filterbtn" class="btn btn-primary btn-fill">Plot</button> -->
-                        </div>
+                 <!--        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  -->
 
-    <input type="hidden" name="itemId" id="itemId" value="{{ $itemId }}"> -->
+    <input type="hidden" name="itemId" id="itemId" value="{{ $itemId }}">  
     <!-- PLOT MODAL START -->
 @endsection
 
@@ -204,14 +201,22 @@
                         coordinates = fetchedData.coordinates
                     }
 
-
                     $('#container').highcharts({
                         chart: {
                           type: 'scatter',
                           zoomType: 'xy'
                         },
                         title: {
-                          text: `Utilization of ${book.b_title}, ed. ${book.b_edition}`
+                          text: `Pattern of Utilization of ${book.b_title}, ed. ${book.b_edition}`,
+                          style: {
+                                    fontSize: '20px'
+                                }
+                        },
+                        subtitle: {
+                             text: `Author: ${fetchedData.book.a_name} - v.${fetchedData.book.b_edition}`,
+                             style: {
+                                    fontSize: '15px'
+                                }
                         },
                         xAxis: {
                           title: {
@@ -228,6 +233,13 @@
                           }
                         },
                         legend: {
+                            title: {
+                                text: `ISBN: ${book.b_isbn}<br>Quantity: ${book.b_qty}<br>Predicted demand: ${fetchedData.predictedQty}`,
+                                style: {
+                                    fontStyle: 'italic',
+                                    fontSize: '18px'
+                                }
+                            },
                           layout: 'vertical',
                           align: 'left',
                           verticalAlign: 'top',
@@ -235,7 +247,10 @@
                           y: 70,
                           floating: true,
                           backgroundColor: '#FFFFFF',
-                          borderWidth: 1
+                          borderWidth: 1,
+                          itemStyle: {
+                            fontSize: "18px"
+                          }
                         },
                         plotOptions: {
                           scatter: {
